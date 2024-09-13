@@ -10,20 +10,18 @@ public class ContaBancaria {
 	//CONSTRUTOR PADRÃO
 	public ContaBancaria() {}
 	//CONSTRUTOR PERSONALIZADO
-	public ContaBancaria(String nomeCliente, int numConta, double saldo) {
+	public ContaBancaria(String nomeCliente, int numConta) {
 		super();
 		this.nomeCliente = nomeCliente;
 		this.numConta = numConta;
-		this.saldo = saldo;
+		this.saldo = 0;
 	}
 	//MÉTODOS
-	public void saque() throws IllegalArgumentException  {
+	public void sacar(Scanner sc) throws IllegalArgumentException  {
 		int saque;
-		Scanner sc=new Scanner(System.in);
 		System.out.println("Seu saldo é de R$: "+this.saldo);
 		System.out.println("Qual o valor deseja sacar? R$: ");
 		saque=sc.nextInt();
-		sc.close();
 			if(saque<=saldo) {
 				saldo-=saque;
 				System.out.println("Aguarde a contagem das cédulas...");
@@ -32,18 +30,25 @@ public class ContaBancaria {
 				throw new IllegalArgumentException("Saldo insuficiente");
 			}
 	}
-	public void deposito() {
-		int deposito;
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Qual o valor a ser depositado? R$:");
-		deposito=sc.nextInt();
-		sc.close();
-		saldo+=deposito;
-		System.out.println("Saldo Atual"+this.saldo);
+	
+	public void depositar(Scanner sc) {
+		double valor;
+		System.out.print("Qual o valor a ser depositado? R$:");
+		valor=sc.nextDouble();
+		this.saldo+=valor;
+		System.out.println("Saldo Atual R$: "+this.saldo);
 	}
-	public void cadastro() {
+
+	public void cadastrar() {
 		System.out.println("Cliente: "+this.nomeCliente);
 		System.out.println("Conta: "+this.numConta);
 		System.out.println("Saldo: R$: "+this.saldo);
 	}
+	public String exibirDadosConta() {
+		String s="Conta ["+numConta;
+		s+="] Titular ["+nomeCliente;
+		s+="] Saldo R$: "+saldo;
+		return s;
+	}
+	
 }
